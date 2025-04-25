@@ -1,0 +1,1 @@
+cd ./example_pages && python -m http.server
