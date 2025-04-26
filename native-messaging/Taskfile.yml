@@ -1,0 +1,9 @@
+version: '3'
+tasks:
+  build:
+    cmds:
+      - go build -o dist/app_bin ./app
+  install:
+    cmds:
+      - task build
+      - python ./install_native_messaging_manifest.py
