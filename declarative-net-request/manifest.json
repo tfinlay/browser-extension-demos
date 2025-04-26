@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "[Demo version] LEARN PDF auto-opener with DeclarativeNetRequest",
+  "version": "1.1",
+  "content_scripts": [
+    {
+      "matches": ["*://*.learn.canterbury.ac.nz/*", "*://127.0.0.1/*"],
+      "js": ["opener.js"]
+    }
+  ],
+
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "learn_force_download",
+        "enabled": true,
+        "path": "dnr_rules.json"
+      }
+    ]
+  },
+  "permissions": [
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "host_permissions": [
+    "*://*.learn.canterbury.ac.nz/*", "*://127.0.0.1/*"
+  ]
+}

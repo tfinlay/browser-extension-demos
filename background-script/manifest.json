@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "[Demo version] LEARN PDF auto-opener with WebRequest",
+  "version": "1.1",
+  "content_scripts": [
+    {
+      "matches": ["*://*.learn.canterbury.ac.nz/*", "*://127.0.0.1/*"],
+      "js": ["opener.js"]
+    }
+  ],
+
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest", "webRequestBlocking",
+    "*://*.learn.canterbury.ac.nz/*", "*://127.0.0.1/*"
+  ]
+}
