@@ -7,11 +7,11 @@ import (
 	"io"
 	"os"
 
-	"github.com/tfinlay/browser-extension-demos/native-messaging/app/password"
+	"github.com/tfinlay/browser-extension-demos/native-messaging/app/store"
 )
 
 type loginGetter interface {
-	GetLogin(host string) (password.Login, error)
+	GetLogin(host string) (store.Login, error)
 }
 
 type MessageHandler struct {
@@ -24,14 +24,14 @@ func NewMessageHandler(passwordManager loginGetter) *MessageHandler {
 	}
 }
 
-func (h *MessageHandler) buildLoginResponse(login password.Login, err error) interface{} {
+func (h *MessageHandler) buildLoginResponse(login store.Login, err error) interface{} {
 	if err == nil {
 		return SuccessReponseMessage{
 			Username: login.Username,
 			Password: login.Password,
 		}
 	} else {
-		if errors.Is(err, password.ErrUnknownHostname) {
+		if errors.Is(err, store.ErrUnknownHostname) {
 			return ErrorResponseMessage{
 				Error: "unknown host",
 			}

@@ -1,19 +1,19 @@
-package password
+package store
 
 import (
 	"errors"
 	"fmt"
 )
 
-var ErrUnknownHostname = errors.New("no password entry exists for the given hostname")
+var ErrUnknownHostname = errors.New("no login entry exists for the given hostname")
 
 type Login struct {
 	Username string
 	Password string
 }
 
-// passwords is a map from host -> password entry
-var passwords = map[string]Login{
+// logins is a map from host -> login entry
+var logins = map[string]Login{
 	"127.0.0.1:8000": {
 		Username: "my.username",
 		Password: "supersecretpassword",
@@ -27,7 +27,7 @@ func NewLoginManager() *LoginManager {
 }
 
 func (p *LoginManager) GetLogin(host string) (Login, error) {
-	if entry, ok := passwords[host]; ok {
+	if entry, ok := logins[host]; ok {
 		return entry, nil
 	}
 	return Login{}, fmt.Errorf("failed to get password for %q: %w", host, ErrUnknownHostname)
