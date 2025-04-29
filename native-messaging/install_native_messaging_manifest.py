@@ -25,7 +25,8 @@ if __name__ == "__main__":
         key = winreg.CreateKey(winreg.HKEY_CURRENT_USER, KEY_PATH)
         winreg.SetValueEx(key, '', 0, winreg.REG_SZ, config_path)
     elif platform.system() == "Darwin":
-        with open(f'~/Library/Application Support/Mozilla/NativeMessagingHosts/{NAME}.json"', 'w') as f:
-            json.dump(REG_ENTRY, f, indent=4)
+        print(f"Please place the following content in the file at path: ~/Library/Application Support/Mozilla/NativeMessagingHosts/{NAME}.json")
+        print('---')
+        print(json.dumps(REG_ENTRY, indent=4))
     else:
         raise NotImplementedError(f"System {platform.system()} is not suported")
